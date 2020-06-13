@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from utils import plot_series
 from data_reader import load_data
 
-model = tf.keras.models.load_model('saved_models/simple_model(huber_loss_sgd).h5')
+model = tf.keras.models.load_model('saved_models/lstm_model.h5', custom_objects={'tf': tf})
 
 print("\n M O D E L   S U M M A R Y  \n")
 print(model.summary())
