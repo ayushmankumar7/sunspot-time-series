@@ -10,9 +10,9 @@ def simple_model(window_size):
     ])
     optimizer = tf.keras.optimizers.SGD(lr = 1e-8, momentum = 0.9)
     model.compile(
-        # loss = tf.keras.losses.Huber(),
-        optimizer = 'adam',
-        loss = 'mse'
+        loss = tf.keras.losses.Huber(),
+        optimizer = optimizer,
+        # loss = 'mse'
     )
     print("MODEL CALLED !")
     return model
