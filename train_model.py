@@ -32,5 +32,5 @@ lr_schedule = tf.keras.callbacks.LearningRateScheduler(lambda epoch: 1e-8 * 10 *
 print("THIS REACHED ")
 history = model.fit(dataset, epochs = 100, verbose = 0, callbacks = [lr_schedule])
 print(history)
-model.save('saved_models/simple_model.h5')
+model.save('saved_models/simple_model(huber_loss_sgd).h5')
 

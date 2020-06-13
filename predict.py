@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from utils import plot_series
 from data_reader import load_data
 
-model = tf.keras.models.load_model('saved_models/simple_model.h5')
+model = tf.keras.models.load_model('saved_models/simple_model(huber_loss_sgd).h5')
 
 print("\n M O D E L   S U M M A R Y  \n")
 print(model.summary())
@@ -20,8 +20,8 @@ X_train = series[:split_time]
 time_valid = time[split_time:]
 X_valid = series[split_time:]
 
-plot_series(time, series)
-plt.show()
+# plot_series(time, series, title = "Original Data")
+# plt.show()
 
 window_size = 30
 batch_size = 32
@@ -43,5 +43,7 @@ plt.figure(figsize=(10, 6))
 
 plot_series(time_valid, X_valid)
 
-plot_series(time_valid, results)
+plot_series(time_valid, results, title = "simple_model(huber_loss_sgd) prediction", text = "Dense(100)\nDense(10)\nDense(1)\nloss = Huber\nOptimizer=SGD")
 plt.show()
+
+# plt.savefig('plotted_graphs/simple_model.png', bbox_inches='tight')
