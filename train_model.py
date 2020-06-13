@@ -32,18 +32,5 @@ lr_schedule = tf.keras.callbacks.LearningRateScheduler(lambda epoch: 1e-8 * 10 *
 print("THIS REACHED ")
 history = model.fit(dataset, epochs = 100, verbose = 0, callbacks = [lr_schedule])
 print(history)
+model.save('saved_models/simple_model.h5')
 
-
-forecast = []
-for time in range(len(series) - window_size):
-  forecast.append(model.predict(series[time:time + window_size][np.newaxis]))
-
-forecast = forecast[split_time-window_size:]
-results = np.array(forecast)[:, 0, 0]
-
-
-plt.figure(figsize=(10, 6))
-
-plot_series(time_valid, X_valid)
-plot_series(time_valid, results)
-plt.show()
