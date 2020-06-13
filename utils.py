@@ -12,9 +12,11 @@ def windowed_dataset(series, window_size, batch_size, shuffle_buffer):
     return dataset
 
 
-def plot_series(time, series, format="-", start=0, end=None):
+def plot_series(time, series, text = "",title ="", format="-", start=0, end=None):
     plt.plot(time[start:end], series[start:end], format)
     plt.xlabel("Time")
     plt.ylabel("Value")
+    plt.figtext(.8, .8, text)
+    plt.title(title)
     plt.grid(False)
 
