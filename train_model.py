@@ -2,7 +2,7 @@ import tensorflow as tf
 import numpy as np 
 import matplotlib.pyplot as plt
 
-from model import simple_model, lstm_model
+from model import simple_model, lstm_model, conv_lstm
 from utils import windowed_dataset, plot_series
 from data_reader import load_data
 
@@ -25,12 +25,14 @@ shuffle_buffer_size  = 1000
 print(X_train.shape)
 dataset = windowed_dataset(X_train, window_size, batch_size, shuffle_buffer_size)
 print(dataset)
-model = lstm_model(window_size)
+
+#  IMPORT MODEL
+model = conv_lstm(window_size)
 
 lr_schedule = tf.keras.callbacks.LearningRateScheduler(lambda epoch: 1e-8 * 10 ** (epoch/20))
 
 print("THIS REACHED ")
-history = model.fit(dataset, epochs = 100, verbose = 0, callbacks = [lr_schedule])
+history = model.fit(dataset, epochs = 200, verbose = 0, callbacks = [lr_schedule])
 print(history)
-model.save('saved_models/lstm_model.h5')
+model.save('saved_models/conv_lstm.h5')
 
