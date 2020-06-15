@@ -35,18 +35,24 @@ def lstm_model(window_size):
 
 def conv_lstm(window_size):
 
+
     model = tf.keras.models.Sequential([
-        tf.keras.layers.Conv1D(32, 5, 1, "casual", activation = 'relu', input_shape = [None, 1]),
-        tf.keras.layers.LSTM(32, return_sequences = True),
-        tf.keras.layers.LSTM(32),
-        tf.keras.layers.Dense(1),
-        tf.keras.layers.Lambda(lambda x : x*200)
+    tf.keras.layers.Conv1D(filters=60, kernel_size=5,
+                        strides=1, padding="causal",
+                        activation="relu",
+                        input_shape=[None, 1]),
+    tf.keras.layers.LSTM(60, return_sequences=True),
+    tf.keras.layers.LSTM(60, return_sequences=True),
+    tf.keras.layers.Dense(30, activation="relu"),
+    tf.keras.layers.Dense(10, activation="relu"),
+    tf.keras.layers.Dense(1),
+    tf.keras.layers.Lambda(lambda x: x * 400)
     ])
 
-    model.compile(
-        loss = tf.keras.losses.Huber(),
-        optimizer = tf.keras.optimizers.SGD(lr = 1e-6, momentum = 0.9)
 
-    )
+    optimizer = tf.keras.optimizers.SGD(lr=1e-5, momentum=0.9)
+    model.compile(loss=tf.keras.losses.Huber(),
+                optimizer=optimizer,
+                metrics=["mae"])
 
     return model
