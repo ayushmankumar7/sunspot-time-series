@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from model import simple_model, lstm_model, conv_lstm
-from utils import windowed_dataset, plot_series
+from utils import windowed_dataset, plot_series, windowed_dataset1
 from data_reader import load_data
 
 
@@ -23,7 +23,7 @@ batch_size = 32
 shuffle_buffer_size  = 1000
 
 print(X_train.shape)
-dataset = windowed_dataset(X_train, window_size, batch_size, shuffle_buffer_size)
+dataset = windowed_dataset1(X_train, window_size, batch_size, shuffle_buffer_size)
 print(dataset)
 
 #  IMPORT MODEL
